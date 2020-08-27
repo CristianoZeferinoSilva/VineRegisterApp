@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput,Image,ToastAndroid } from "react-native";
+import { View, Text, TextInput,Image,ToastAndroid,BackHandler } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Camera } from 'expo-camera';
@@ -48,7 +48,13 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
     const {imgVine} = route.params;
   if(imgVine != null)
     setPictureImg(imgVine);
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+
   });
+  function handleBackButtonClick() {
+    navigate("Landing");
+    return true;
+}
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
