@@ -6,9 +6,7 @@ import styles from "./styles";
 import PageHeader from "../../components/PageHeader";
 import VineItem, { Vinelist } from "../../components/VineItem";
 
-import {
-  ScrollView,
-} from "react-native-gesture-handler";
+import {ScrollView} from "react-native-gesture-handler";
 
 function VineListPage() {
   const [isFavorited, setIsFavorited] = useState<any[]>([]);
@@ -16,12 +14,12 @@ function VineListPage() {
   async function handleToggleFavorite() {
     const vines = await AsyncStorage.getItem("sjvherkvjervkwe");
     let favoritesArray: Array<any> = [];
-
     if (vines) {
       favoritesArray = JSON.parse(vines);
       setIsFavorited(favoritesArray);
     }
   }
+
   useEffect(() => {
     (async () => {
       handleToggleFavorite();

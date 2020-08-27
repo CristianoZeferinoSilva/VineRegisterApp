@@ -46,11 +46,8 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
 
   useEffect(() => {
     const {imgVine} = route.params;
-    console.log(imgVine+"    fbwrwrt");
-  if(imgVine != null){
-  console.log(imgVine);
+  if(imgVine != null)
     setPictureImg(imgVine);
-  }
   });
   useEffect(() => {
     (async () => {
@@ -68,7 +65,7 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
   }
 
 
-  async function handleToggleFavorite() {
+  async function HandleFormRegistration() {
     ToastAndroid.showWithGravity(
       "Guardando o Registo",
       ToastAndroid.SHORT,
@@ -90,7 +87,6 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
       );
       navigate("Landing");
     }if (!vines){
-      //console.log("------>");
       let index =favoritesArray.length; 
       favoritesArray.push({name,localbuy,cost,barcodevalue,feedback,index,imgVine,imgWidth,imgHeight});
       await AsyncStorage.setItem("sjvherkvjervkwe", JSON.stringify(favoritesArray));
@@ -101,20 +97,9 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
       );
       navigate("Landing");
     }
-    // handleToggleFavoritelist();
   }
 
-  async function handleToggleFavoritelist() {
-    const favorites = await AsyncStorage.getItem("sjvherkvjervkwe");
-    let favoritesArray: Array<any> = [];
 
-    if (favorites) {
-      favoritesArray = JSON.parse(favorites);
-      //console.log("------");
-     // console.log(favoritesArray);
-    }
-   
-  }
 
   function handleCamera(){
     navigate("CameraComponent");
@@ -178,7 +163,7 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
                 
                 </RectButton>
             <RectButton
-              onPress={handleToggleFavorite}
+              onPress={HandleFormRegistration}
               style={styles.submitButton}
             >
               <Text style={styles.submitButtonText}>Guardar</Text>

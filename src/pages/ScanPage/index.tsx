@@ -12,9 +12,8 @@ import styles from './styles';
 
 function ScanPage() {
     const { goBack } = useNavigation();
-    const [hasPermission, setHasPermission] = useState(null);
-    const [scanned, setScanned] = useState(false);
-    const [barcode, setBarcode] = useState("");
+    const [hasPermission, setHasPermission] = useState<any>(null);
+    const [scanned, setScanned] = useState<any>(false);
     const { navigate } = useNavigation();
     const [passvinevalues, setPassVineValues] = useState<any[]>([]);
     let checked= false;
@@ -27,17 +26,26 @@ function ScanPage() {
       })();
     }, []);
   
-     const handleBarCodeScanned = ({ type, data }) => {
-      setBarcode(data);
+     const handleBarCodeScanned = async ({ type, data }) => {
       setScanned(true);
       //console.log(passvinevalues);
-       handleToggleFavoritelist(data);
-       checked ?  navigate("ExistingProduct", {
-        infoExisteProduct: passvinevalues,
-      }):navigate("VineForm", {
+
+       const favorites = await AsyncStorage.getItem("sjvherkvjervkwe");
+       let favoritesArray: Array<any> = [];
+       let favoay: Array<any> = [];
+       if (favorites) {
+         favoritesArray = JSON.parse(favorites);
+       favoritesArray.map((vinelist: Vinelist,index) => {
+         if(vinelist.barcodevalue===data){
+           setPassVineValues({imgVine:vinelist.imgVine,name:vinelist.name,cost:vinelist.cost,feedback:vinelist.feedback,localbuy:vinelist.localbuy});
+           checked= true;}
+         })
+       }
+       hasPermission ? navigate("VineForm", {
         barcodevalue: data,
+      }) :navigate("ExistingProduct", {
+        infoExisteProduct: passvinevalues,
       });
-      checked= false;
       //setScanned(false);
     };
   
@@ -52,25 +60,7 @@ function ScanPage() {
         goBack();
     }
 
-    async function handleToggleFavoritelist(data) {
-      const favorites = await AsyncStorage.getItem("sjvherkvjervkwe");
-      let favoritesArray: Array<any> = [];
-      let favoay: Array<any> = [];
   
-      if (favorites) {
-        favoritesArray = JSON.parse(favorites);
-      favoritesArray.map((vinelist: Vinelist,index) => {
-        if(vinelist.barcodevalue===data){
-          setPassVineValues({imgVine:vinelist.imgVine,name:vinelist.name,cost:vinelist.cost,feedback:vinelist.feedback,localbuy:vinelist.localbuy});
-          //console.log(passvinevalues);
-
-          checked= true;}
-     
-        })
-      }
-      
-     
-    }
     return (
 <>
         <PageHeader  title="Aponte para o código de barras" ></PageHeader>
@@ -89,7 +79,7 @@ function ScanPage() {
       }}>
            
       <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={scanned ? null : handleBarCodeScanned}
         style={styles.barcodecontainer}
       />
 
