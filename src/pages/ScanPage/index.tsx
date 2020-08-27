@@ -27,18 +27,18 @@ function ScanPage() {
       })();
     }, []);
   
-     const handleBarCodeScanned = async({ type, data }) => {
+     const handleBarCodeScanned = ({ type, data }) => {
       setBarcode(data);
       setScanned(true);
       //console.log(passvinevalues);
-      await handleToggleFavoritelist(data);
+       handleToggleFavoritelist(data);
        checked ?  navigate("ExistingProduct", {
         infoExisteProduct: passvinevalues,
       }):navigate("VineForm", {
         barcodevalue: data,
       });
       checked= false;
-     // setScanned(false);
+      //setScanned(false);
     };
   
    
