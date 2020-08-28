@@ -9,7 +9,6 @@ import landingImg from "../../assets/images/Vine.jpg";
 import heartIcon from "../../assets/images/icons/heart.png";
 import Ionicons from  '@expo/vector-icons/build/Ionicons';
 
-import api from "../../services/api";
 
 function Landing() {
   const { navigate } = useNavigation();

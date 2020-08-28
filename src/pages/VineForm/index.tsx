@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput,Image,ToastAndroid,BackHandler } from "react-native";
+import { View, Text, TextInput,Image,ToastAndroid,BackHandler,Keyboard } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Camera } from 'expo-camera';
@@ -77,7 +77,7 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
       ToastAndroid.SHORT,
       ToastAndroid.CENTER
     );
-    const vines = await AsyncStorage.getItem("sjvherkvjervkwe");
+    const vines = await AsyncStorage.getItem("aekjgfheirjgheirjghweirhg4");
     let favoritesArray: Array<any> = [];
     const {barcodevalue,imgVine,imgWidth,imgHeight} = route.params;
     setPictureImg(imgVine);
@@ -85,7 +85,7 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
       favoritesArray = JSON.parse(vines);
       let index =favoritesArray.length; 
       favoritesArray.push({name,localbuy,cost,barcodevalue,feedback,index,imgVine,imgWidth,imgHeight});
-      await AsyncStorage.setItem("sjvherkvjervkwe", JSON.stringify(favoritesArray));
+      await AsyncStorage.setItem("aekjgfheirjgheirjghweirhg4", JSON.stringify(favoritesArray));
       ToastAndroid.showWithGravity(
         "Guardando com Sucesso",
         ToastAndroid.SHORT,
@@ -95,7 +95,7 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
     }if (!vines){
       let index =favoritesArray.length; 
       favoritesArray.push({name,localbuy,cost,barcodevalue,feedback,index,imgVine,imgWidth,imgHeight});
-      await AsyncStorage.setItem("sjvherkvjervkwe", JSON.stringify(favoritesArray));
+      await AsyncStorage.setItem("aekjgfheirjgheirjghweirhg4", JSON.stringify(favoritesArray));
       ToastAndroid.showWithGravity(
         "Guardando com Sucesso",
         ToastAndroid.SHORT,
@@ -107,8 +107,10 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
 
 
 
-  function handleCamera(){
-    navigate("CameraComponent");
+   function handleCamera(){
+    Keyboard.dismiss();
+     setInterval( () =>{navigate("CameraComponent")}, 2000);
+     
   }
 
 

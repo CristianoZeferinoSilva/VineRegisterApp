@@ -28,9 +28,7 @@ function ScanPage() {
   
      const handleBarCodeScanned = async ({ type, data }) => {
       setScanned(true);
-      //console.log(passvinevalues);
-
-       const favorites = await AsyncStorage.getItem("sjvherkvjervkwe");
+       const favorites = await AsyncStorage.getItem("aekjgfheirjgheirjghweirhg4");
        let favoritesArray: Array<any> = [];
        let favoay: Array<any> = [];
        if (favorites) {
@@ -41,24 +39,16 @@ function ScanPage() {
            checked= true;}
          })
        }
-       hasPermission ? navigate("VineForm", {
+       !checked ? navigate("VineForm", {
         barcodevalue: data,
       }) :navigate("ExistingProduct", {
         infoExisteProduct: passvinevalues,
       });
-      //setScanned(false);
+      checked =false;
     };
   
    
-    if (hasPermission === false) {
-      return <Text>No access to camera</Text>;
-    }
-
-    
-
-    function handleNavigateBack() {
-        goBack();
-    }
+   
 
   
     return (

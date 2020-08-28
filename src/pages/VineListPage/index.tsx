@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, Button } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import styles from "./styles";
@@ -12,7 +12,7 @@ function VineListPage() {
   const [isFavorited, setIsFavorited] = useState<any[]>([]);
 
   async function handleToggleFavorite() {
-    const vines = await AsyncStorage.getItem("sjvherkvjervkwe");
+    const vines = await AsyncStorage.getItem("aekjgfheirjgheirjghweirhg4");
     let favoritesArray: Array<any> = [];
     if (vines) {
       favoritesArray = JSON.parse(vines);
@@ -41,12 +41,13 @@ function VineListPage() {
       >
        
         {isFavorited.map((vinelist: Vinelist,index) => (
+          
           <View key={index}>
+            {vinelist.imgVine!="" ?
           <VineItem
             key={index}
             vinelist={vinelist}
-             />
-
+             />:<View></View>}
           
           </View>
         ))}

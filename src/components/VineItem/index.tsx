@@ -1,9 +1,12 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
-
-
+import { View, Image, Text,Button, Alert ,ToastAndroid} from "react-native";
+import {RectButton} from "react-native-gesture-handler";
+import * as FileSystem from 'expo-file-system';
+import AsyncStorage from "@react-native-community/async-storage";
 import FeedBack from "../feedBack";
 import styles from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import Ionicons from  '@expo/vector-icons/build/Ionicons';
 
 
 
@@ -23,9 +26,73 @@ interface VinelistItemProps {
   vinelist: Vinelist;
 }
 
+
+function handlePressButton(numberindex,vinelist){
+  Alert.alert(
+    "Apagar "+vinelist.name+" ?",
+    "Apagará parte dos dados têm a certeza?",
+    [
+      {
+        text: "Cancelar",
+        onPress: () => { 
+          ToastAndroid.showWithGravity(
+          "Nada foi Apagado",
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER
+        );},
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => RemoveItem(numberindex) }
+    ],
+    { cancelable: false }
+  );
+console.log(vinelist);
+
+}
+const wait = (timeout) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
+
+async function RemoveItem(numberindex){
+  const favorites = await AsyncStorage.getItem("aekjgfheirjgheirjghweirhg4");
+  let favoritesArray: Array<any> = [];
+  if (favorites) {
+    favoritesArray = JSON.parse(favorites);
+    favoritesArray.map((vinelist: Vinelist,index) => {
+      
+     if(index === numberindex){
+       try{
+         FileSystem.deleteAsync(vinelist.imgVine);
+       } catch (e) {
+         console.error(e);
+       }
+      vinelist.imgVine="";
+
+    wait(2000).then(() => {});
+      ToastAndroid.showWithGravity(
+      "Apagado Com Sucesso",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+     }
+     
+    })
+   
+   await AsyncStorage.setItem("aekjgfheirjgheirjghweirhg4", JSON.stringify(favoritesArray));
+    
+}
+
+}
+
 const VineItem: React.FC<VinelistItemProps> = ({ vinelist }) => {
   return (
     <View style={styles.container}>
+      <View style={styles.x}>
+       <RectButton style={styles.removeButton} onPress={()=>handlePressButton(vinelist.index,vinelist)}><Ionicons name={"ios-close"} size={42} color={"#8257E5"} /></RectButton>
+      
+       </View>
       <View style={styles.all}>
       <View style={styles.vineimage}>
       <Image  source={{
@@ -47,7 +114,6 @@ const VineItem: React.FC<VinelistItemProps> = ({ vinelist }) => {
         </Text>
       </View>
       <FeedBack  itemvalue={vinelist.feedback} indexvalue={vinelist.index} />
-
     </View>
   );
 };

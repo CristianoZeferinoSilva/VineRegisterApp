@@ -10,20 +10,9 @@ import styles from "./styles";
 const CameraComponent  = () => {
   const [data, setData] = useState("");
   const { navigate } = useNavigation();
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+ 
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-
+  //setInterval( () =>{}, 1000);
   
   let camera;
   async function takePicture(){

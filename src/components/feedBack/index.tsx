@@ -25,7 +25,7 @@ let _panResponder;
 //let feed ;
 
 async function handleToggleFavorite(toValue) {
-  const favorites = await AsyncStorage.getItem("sjvherkvjervkwe");
+  const favorites = await AsyncStorage.getItem("aekjgfheirjgheirjghweirhg4");
   let favoritesArray: Array<any> = [];
   if (favorites) {
     favoritesArray = JSON.parse(favorites);
@@ -36,7 +36,7 @@ async function handleToggleFavorite(toValue) {
      }
      
     })
-   await AsyncStorage.setItem("sjvherkvjervkwe", JSON.stringify(favoritesArray));
+   await AsyncStorage.setItem("aekjgfheirjgheirjghweirhg4", JSON.stringify(favoritesArray));
     
 }
 

@@ -16,7 +16,7 @@ function Favorites() {
   const [isFavorited, setIsFavorited] = useState<any[]>([]);
 
   async function handleToggleFavorite() {
-    const vines = await AsyncStorage.getItem("sjvherkvjervkwe");
+    const vines = await AsyncStorage.getItem("aekjgfheirjgheirjghweirhg4");
     let favoritesArray: Array<any> = [];
     let top5: Array<any> = [];
 
@@ -26,11 +26,13 @@ function Favorites() {
      // console.log(favoritesArray.sort(compare));
      favoritesArray.sort(compare)
      favoritesArray.map((vinelist: Vinelist) => {
+      if(vinelist.imgVine!="" )
       cont++;
-      if(cont<=5)
-      top5.push(vinelist);
-     })
-        console.log(top5);
+      if(cont<=5){
+        if(vinelist.imgVine!="" )
+           top5.push(vinelist);
+
+         }    })
       
       setIsFavorited(top5);
     }

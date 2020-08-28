@@ -32,7 +32,20 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     backgroundColor: "#eee",
   },
-
+  removeButton:{
+    width:30,
+    height:30,
+    borderRadius:30,
+    backgroundColor:'#32264d',
+    justifyContent:'center',
+    alignItems:'center',
+  },
+x:{
+  margin:10,
+  justifyContent:'flex-end',
+  alignItems:'flex-end',
+  flex:1,
+},
   profileInfo: {
     marginLeft: 0,
   },
