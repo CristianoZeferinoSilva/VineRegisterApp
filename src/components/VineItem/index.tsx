@@ -24,7 +24,12 @@ export interface Vinelist {
 
 interface VinelistItemProps {
   vinelist: Vinelist;
+  title:string;
 }
+
+
+const VineItem: React.FC<VinelistItemProps> = ({ vinelist ,title}) => {
+  const { navigate } = useNavigation();
 
 
 function handlePressButton(numberindex,vinelist){
@@ -49,11 +54,6 @@ function handlePressButton(numberindex,vinelist){
 console.log(vinelist);
 
 }
-const wait = (timeout) => {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeout);
-  });
-}
 
 async function RemoveItem(numberindex){
   const favorites = await AsyncStorage.getItem("aekjgfheirjgheirjghweirhg4");
@@ -69,13 +69,12 @@ async function RemoveItem(numberindex){
          console.error(e);
        }
       vinelist.imgVine="";
-
-    wait(2000).then(() => {});
       ToastAndroid.showWithGravity(
       "Apagado Com Sucesso",
       ToastAndroid.SHORT,
       ToastAndroid.CENTER
     );
+    navigate("Landing");
      }
      
     })
@@ -85,14 +84,12 @@ async function RemoveItem(numberindex){
 }
 
 }
-
-const VineItem: React.FC<VinelistItemProps> = ({ vinelist }) => {
   return (
     <View style={styles.container}>
+      {title==="withButton" ?
       <View style={styles.x}>
        <RectButton style={styles.removeButton} onPress={()=>handlePressButton(vinelist.index,vinelist)}><Ionicons name={"ios-close"} size={42} color={"#8257E5"} /></RectButton>
-      
-       </View>
+       </View> : <View></View>}
       <View style={styles.all}>
       <View style={styles.vineimage}>
       <Image  source={{

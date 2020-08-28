@@ -47,6 +47,7 @@ function VineListPage() {
           <VineItem
             key={index}
             vinelist={vinelist}
+            title="withButton"
              />:<View></View>}
           
           </View>

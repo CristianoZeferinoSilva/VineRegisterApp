@@ -109,8 +109,8 @@ const VineForm :React.FC<VineProps> = ({  route  }) => {
 
    function handleCamera(){
     Keyboard.dismiss();
-     setInterval( () =>{navigate("CameraComponent")}, 2000);
-     
+     let interval = setInterval( () =>{navigate("CameraComponent"); clearInterval(interval)}, 2000);
+    
   }
 
 
