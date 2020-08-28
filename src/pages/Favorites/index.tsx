@@ -81,6 +81,7 @@ function Favorites() {
           <VineItem
             key={index}
             vinelist={vinelist}
+            title=""
              />
 
           

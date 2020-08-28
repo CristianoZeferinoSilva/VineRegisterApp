@@ -15,7 +15,7 @@ function ScanPage() {
     const [hasPermission, setHasPermission] = useState<any>(null);
     const [scanned, setScanned] = useState<any>(false);
     const { navigate } = useNavigation();
-    const [passvinevalues, setPassVineValues] = useState<any[]>([]);
+    const [passvinevalues, setPassVineValues] = useState<any>([]);
     let checked= false;
   
    
@@ -32,17 +32,19 @@ function ScanPage() {
        let favoritesArray: Array<any> = [];
        let favoay: Array<any> = [];
        if (favorites) {
-         favoritesArray = JSON.parse(favorites);
-       favoritesArray.map((vinelist: Vinelist,index) => {
+         favoritesArray = await JSON.parse(favorites);
+        favoritesArray.map((vinelist: Vinelist,index) => {
          if(vinelist.barcodevalue===data){
-           setPassVineValues({imgVine:vinelist.imgVine,name:vinelist.name,cost:vinelist.cost,feedback:vinelist.feedback,localbuy:vinelist.localbuy});
-           checked= true;}
+            //setPassVineValues(vinelist);
+             favoay.push(vinelist);
+            //console.log(vinelist);
+            checked= true;}
          })
        }
        !checked ? navigate("VineForm", {
         barcodevalue: data,
       }) :navigate("ExistingProduct", {
-        infoExisteProduct: passvinevalues,
+        infoExisteProduct: favoay,
       });
       checked =false;
     };
@@ -67,11 +69,11 @@ function ScanPage() {
         flexDirection: 'column',
         justifyContent: 'flex-end',
       }}>
-           
-      <BarCodeScanner
+           {hasPermission ?  <BarCodeScanner
         onBarCodeScanned={scanned ? null : handleBarCodeScanned}
         style={styles.barcodecontainer}
-      />
+      />: <View></View>}
+     
 
     </View>
  

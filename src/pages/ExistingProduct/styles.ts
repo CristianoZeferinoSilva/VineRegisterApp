@@ -84,6 +84,22 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
   },
+  shitemoji:{
+    top:30,
+width:'40%',
+height:'40%',
+resizeMode:'contain',
+  },
+  shitWiew:{
+  flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+    top:0,
+  },
+  shitText:{
+    top:0,
+    textAlign:'center',
+  },
 
 });
 

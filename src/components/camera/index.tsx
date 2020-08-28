@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity,ToastAndroid } from "react-native";
 import { Camera } from 'expo-camera';
 import { useNavigation } from "@react-navigation/native";
-import styles from "./styles";
 
 
 
